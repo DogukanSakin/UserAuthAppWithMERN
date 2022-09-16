@@ -19,7 +19,7 @@ exports.validateUserRegister = [
     .isLength({min: 6})
     .withMessage('The password is too weak!'),
   //for re-password
-  check('confirmPassword')
+  check('repassword')
     .trim()
     .not()
     .isEmpty()
@@ -33,13 +33,11 @@ exports.validateUserRegister = [
 ];
 exports.userValidation = (req, res, next) => {
   const result = validationResult(req).array();
-  console.log(result);
   if (!result.length) {
     next();
   } //no validation error so call next method
   else {
     const error = result[0].msg;
-    console.log(result[0]);
     res.json({success: false, message: error}); // if there is an error we send this error to the response
   }
 };

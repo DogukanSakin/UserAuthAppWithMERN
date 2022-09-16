@@ -7,6 +7,8 @@
 *.bzl linguist-detectable=false
 *.mk linguist-detectable=false
 *.env linguist-detectable=false
+*.css linguist-detectable=false
+*.cmake linguist-detectable=false
 *Gemfile linguist-vendored
 *ios/Podfile linguist-vendored
 *Gemfile.lock linguist-vendored

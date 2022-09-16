@@ -2,12 +2,11 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const {PORT} = require('../clientConfig');
+
 const dotenvConfig = require('dotenv').config();
 const userRouter = require('./routes/userRouter');
 const app = express();
-
-//Values:
-const port = 8000;
 
 //Database connection:
 mongoose
@@ -28,7 +27,14 @@ app.use(express.urlencoded({extended: true})); // for parsing application/x-www-
 
 app.use(userRouter);
 
-//Others
-app.listen(port, (req, res) => {
-  console.log(`${port} is listening...`);
+//Check connect:
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Welcome the server!',
+  });
+});
+
+app.listen(PORT, (req, res) => {
+  console.log(`${PORT} is listening...`);
 });

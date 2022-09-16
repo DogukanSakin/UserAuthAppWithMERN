@@ -7,6 +7,7 @@ export default function DButton({
   styles,
   overrideButtonContainerStyles,
   overrideButtonTextStyles,
+  onPress,
 }) {
   const tailwind = useTailwind();
   return (
@@ -24,7 +25,8 @@ export default function DButton({
                 'bg-[#F45FF8] items-center justify-center rounded-md p-3 my-2',
               ),
             ),
-      ]}>
+      ]}
+      onPress={onPress}>
       <Text
         style={[
           {...overrideButtonTextStyles},

@@ -5,17 +5,16 @@ exports.userLogin = async function (req, res) {
     const user = await User.findOne({email: req.body.email});
     //check user in db
     if (user !== null) {
-      console.log('User found:' + user);
       await bcrypt.compare(req.body.password, user.password, (err, same) => {
         if (same) {
-          res.json({message: 'Successfully login!'});
+          res.json({success: true, message: 'Successfully login!'});
         } else {
-          res.json('Password is wrong.');
+          res.json({success: false, message: 'The password is wrong!'});
         }
         err && console.log('Error in login func : ' + err);
       }); // check password
     } else {
-      res.json('User not found!');
+      res.json({success: false, message: 'The user not found!'});
     }
   } catch (error) {
     console.log(error);
@@ -32,8 +31,8 @@ exports.userRegister = async function (req, res) {
         password: req.body.password,
       });
       res.json(user);
-    } else {
-      res.send('The email is dublicated.');
+    } else if (isUserNew === false) {
+      res.json({success: false, message: 'The email is dublicated.'});
     }
   } catch (error) {
     console.log('error catch: ' + error);

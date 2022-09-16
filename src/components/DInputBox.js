@@ -10,6 +10,9 @@ export default function DInputBox({
   placeholder,
   iconName,
   isPassword = false,
+  onBlur,
+  onChange,
+  value,
 }) {
   const tailwind = useTailwind();
   return (
@@ -40,6 +43,9 @@ export default function DInputBox({
         placeholder={placeholder}
         placeholderTextColor="white"
         secureTextEntry={isPassword}
+        onBlur={onBlur}
+        onChangeText={onChange}
+        value={value}
         style={[{color: 'white'}, tailwind(classNames('ml-2'))]}
       />
     </View>
