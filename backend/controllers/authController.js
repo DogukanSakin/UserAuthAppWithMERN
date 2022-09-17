@@ -7,7 +7,7 @@ exports.userLogin = async function (req, res) {
     if (user !== null) {
       await bcrypt.compare(req.body.password, user.password, (err, same) => {
         if (same) {
-          res.json({success: true, message: 'Successfully login!'});
+          res.json({success: true, message: 'Successfully login!', user});
         } else {
           res.json({success: false, message: 'The password is wrong!'});
         }
@@ -30,7 +30,7 @@ exports.userRegister = async function (req, res) {
         email: req.body.email,
         password: req.body.password,
       });
-      res.json(user);
+      res.json({success: true, user: user});
     } else if (isUserNew === false) {
       res.json({success: false, message: 'The email is dublicated.'});
     }

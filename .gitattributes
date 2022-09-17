@@ -9,6 +9,7 @@
 *.env linguist-detectable=false
 *.css linguist-detectable=false
 *.cmake linguist-detectable=false
+*.txt linguist-detectable=false
 *Gemfile linguist-vendored
 *ios/Podfile linguist-vendored
 *Gemfile.lock linguist-vendored

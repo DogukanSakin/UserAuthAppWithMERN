@@ -3,7 +3,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const {PORT} = require('../clientConfig');
-
 const dotenvConfig = require('dotenv').config();
 const userRouter = require('./routes/userRouter');
 const app = express();
@@ -22,7 +21,6 @@ mongoose
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
-
 // Routers:
 
 app.use(userRouter);

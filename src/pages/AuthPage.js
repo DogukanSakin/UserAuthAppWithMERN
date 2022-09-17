@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Dimensions,
   ImageBackground,
@@ -9,11 +9,8 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import {TailwindProvider} from 'tailwind-rn';
 import DView from '../components/DView';
-import utilities from '../../tailwind.json';
 import DText from '../components/DText';
-
 import DInputBox from '../components/DInputBox';
 import DButton from '../components/DButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,8 +18,9 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {useForm, Controller} from 'react-hook-form';
 import client from '../api/client';
 import {showMessage} from 'react-native-flash-message';
-
-export default function AuthPage({navigation}) {
+import UserContext from '../context/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+export default function AuthPage() {
   const Tab = createMaterialTopTabNavigator();
   const deviceSize = Dimensions.get('screen');
 
@@ -107,7 +105,8 @@ export default function AuthPage({navigation}) {
     </DView>
   );
 }
-function Login({navigation}) {
+function Login() {
+  const {setUser} = useContext(UserContext);
   const {
     control,
     handleSubmit,
@@ -127,7 +126,14 @@ function Login({navigation}) {
           type: 'danger',
         });
       } else if (response.data.success === true) {
-        navigation.navigate('Home');
+        //Go home
+        try {
+          const currentUserData = JSON.stringify(response.data.user);
+          await AsyncStorage.setItem('@currentUser', currentUserData);
+        } catch (e) {
+          console.log('Set user data error in login func. : ' + e);
+        }
+        setUser(response.data.user);
       }
     } catch (error) {
       console.log('ERROR IN LOGIN: ' + error.message);
@@ -212,7 +218,8 @@ function Login({navigation}) {
     </KeyboardAvoidingView>
   );
 }
-function Register({navigation}) {
+function Register() {
+  const {setUser} = useContext(UserContext);
   const {
     control,
     handleSubmit,
@@ -228,14 +235,20 @@ function Register({navigation}) {
   async function onSubmit(data) {
     try {
       const response = await client.post('/create-user', {...data});
-      console.log('response:' + response.data);
       if (response.data.success === false) {
         showMessage({
           message: response.data.message,
           type: 'danger',
         });
       } else if (response.data.success === true) {
-        navigation.navigate('Home');
+        //Go home
+        try {
+          const currentUserData = JSON.stringify(response.data.user);
+          await AsyncStorage.setItem('@currentUser', currentUserData);
+        } catch (e) {
+          console.log('Set user data error in login func. : ' + e);
+        }
+        setUser(response.data.user);
       }
     } catch (error) {
       console.log('ERROR IN REGISTER: ' + error.message);

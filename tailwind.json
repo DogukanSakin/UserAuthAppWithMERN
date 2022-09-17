@@ -124,6 +124,11 @@
 			"fontSize": 34
 		}
 	},
+	"text-[14px]": {
+		"style": {
+			"fontSize": 14
+		}
+	},
 	"text-white": {
 		"style": {
 			"--tw-text-opacity": 1,
