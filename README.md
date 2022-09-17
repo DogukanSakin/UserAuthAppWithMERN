@@ -36,9 +36,47 @@ For backend:
 <img src="https://user-images.githubusercontent.com/86911611/190851168-33666957-933d-4829-ad42-3658eb50c65e.jpg" width="400" height="900" /><img/>
 <img src="https://user-images.githubusercontent.com/86911611/190851174-2319045b-b391-4aeb-8b08-706b90c87ffe.jpg" width="400" height="900" /><img/>
 <img src="https://user-images.githubusercontent.com/86911611/190851180-07b99649-2fb1-43cf-b62a-f1878e8704cb.jpg" width="400" height="900" /><img/>
-
-
-
-
-
 </div>
+
+## Installation
+
+Clone this repository on your local machine.
+
+```
+git clone https://github.com/DogukanSakin/UserAuthAppWithMERN.git
+```
+
+## Usage
+
+1) Update the clientConfig.js file in the main directory with your own information.
+
+2) You should use these two commands in both the main directory and the backend directory:
+```
+npm init
+npm install
+```
+
+4) Start server in backend directory
+```
+npm start
+```
+
+5) Start RN in main directory
+```
+npx react-native start
+```
+
+These instructions will get a copy of the project up and running on your local machine for development and testing purposes.
+
+## To Run the Application
+In the project directory you can run:
+
+```
+For Android Emulator: npx react-native run-android
+```
+
+```
+For iOS Emulator: npx react-native run-ios
+```
+
+
